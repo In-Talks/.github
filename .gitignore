@@ -1,0 +1,18 @@
+# Dossiers système (Mac/Windows)
+.DS_Store
+Thumbs.db
+
+# Fichiers de configuration locale de l'éditeur
+.vscode/
+.idea/
+*.swp
+
+# Fichiers temporaires ou logs
+*.log
+.temp/
+
+# SÉCURITÉ : Empêcher l'ajout accidentel de secrets si vous testez des scripts localement
+.env
+.env.local
+*.pem
+*.key

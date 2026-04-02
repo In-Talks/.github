@@ -1,0 +1,15 @@
+# Ce fichier définit les approbations automatiques requises.
+
+# Par défaut, vous êtes le propriétaire de tout
+* @In-Talks/admins
+
+# Les fichiers de configuration sensibles demandent une attention double
+/package.json   @In-Talks/admins
+/vercel.json    @In-Talks/admins
+/.env.example   @In-Talks/admins
+
+# Le dossier de documentation peut être géré par l'équipe produit
+/profile/       @ZAKMOUCHTATI44
+
+# Les workflows GitHub Actions
+/.github/workflows/ @In-Talks/admins
