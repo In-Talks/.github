@@ -1,0 +1,31 @@
+{
+  "servers": {
+    "docker": {
+      "type": "stdio",
+      "command": "/Applications/Docker.app/Contents/Resources/cli-plugins/docker-mcp",
+      "args": ["gateway", "run"]
+    },
+    "github": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${env:GITHUB_TOKEN}"
+      }
+    },
+    "postgres": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${env:DATABASE_URL}"]
+    },
+    "filesystem": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "${env:INTALKS_WORKSPACE}"
+      ]
+    }
+  }
+}

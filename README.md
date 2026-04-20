@@ -25,6 +25,62 @@ Pour maintenir une qualité de code constante chez **In-Talks**, nous suivons ce
 
 ---
 
+### 🤖 Configuration MCP (Model Context Protocol)
+
+Ce dépôt contient un fichier `mcp.json` partagé pour les assistants IA (GitHub Copilot, Claude...). Il configure trois serveurs :
+
+| Serveur | Utilité |
+|---|---|
+| `github` | Gérer les Issues, PRs et GitHub Projects de l'org |
+| `postgres` | Interroger la base PostgreSQL de production |
+| `filesystem` | Naviguer et lire le code source |
+| `docker` | Gérer les conteneurs, images et volumes Docker locaux |
+
+**Installation (à faire une seule fois par dev) :**
+
+1. Copier `.github/mcp.json` dans `.vscode/mcp.json` à la racine de votre workspace local.
+   > VS Code ne lit que `.vscode/mcp.json` — le fichier `.github/mcp.json` est uniquement la **source partagée** versionnée. Si la config change, re-copier le fichier.
+2. Ajouter les variables d'environnement :
+
+**macOS / Linux** — dans `~/.zshrc` ou `~/.bashrc` :
+
+```bash
+# GitHub — générer sur https://github.com/settings/tokens (scopes: repo, read:org, project)
+export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
+
+# PostgreSQL In-Talks (récupérer le mot de passe auprès du CTO)
+export DATABASE_URL=postgresql://root:<PASSWORD>@37.60.249.81:3499/in_talks_express
+
+# Chemin absolu vers le dossier racine des repos In-Talks sur votre machine
+export INTALKS_WORKSPACE=/Users/<votre-username>/in-talks
+```
+
+Recharger le shell :
+```bash
+source ~/.zshrc
+```
+
+**Windows** — dans PowerShell (profil persistant) :
+
+```powershell
+# Ouvrir le profil PowerShell
+notepad $PROFILE
+
+# Ajouter ces lignes dans le fichier ouvert :
+$env:GITHUB_TOKEN = "ghp_xxxxxxxxxxxxxxxxxxxx"
+$env:DATABASE_URL = "postgresql://root:<PASSWORD>@37.60.249.81:3499/in_talks_express"
+$env:INTALKS_WORKSPACE = "C:\Users\<votre-username>\in-talks"
+```
+
+Recharger le profil :
+```powershell
+. $PROFILE
+```
+
+> ⚠️ Ne jamais commiter `DATABASE_URL` ou `GITHUB_TOKEN` en clair dans un repo. Le `GITHUB_TOKEN` est **personnel** à chaque dev.
+
+---
+
 ### 🚀 Liens Utiles
 * **Tableau de bord Vercel** : [Lien vers votre console]
 * **Documentation API** : [Lien vers votre doc interne ou Postman]
